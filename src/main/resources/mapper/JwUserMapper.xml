@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jd.jw.auth.dao.JwUserMapper">
+  <resultMap id="BaseResultMap" type="com.jd.jw.auth.domain.JwUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="account_type" jdbcType="BIT" property="accountType" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="mobile_no" jdbcType="VARCHAR" property="mobileNo" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="store_code" jdbcType="VARCHAR" property="storeCode" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="owner_account" jdbcType="VARCHAR" property="ownerAccount" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="user_status" jdbcType="BIT" property="userStatus" />
+    <result column="dr" jdbcType="BIT" property="dr" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="flag_manager" jdbcType="TINYINT" property="flagManager" />
+    <result column="account_flag" jdbcType="TINYINT" property="accountFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account, account_type, nickname, mobile_no, user_name, store_code, store_name, 
+    memo, owner_account, role_code, create_time, create_user, update_time, update_user, 
+    user_status, dr, email, flag_manager, account_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jw_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jw_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jd.jw.auth.domain.JwUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into jw_user (account, account_type, nickname, 
+      mobile_no, user_name, store_code, 
+      store_name, memo, owner_account, 
+      role_code, create_time, create_user, 
+      update_time, update_user, user_status, 
+      dr, email, flag_manager, 
+      account_flag)
+    values (#{account,jdbcType=VARCHAR}, #{accountType,jdbcType=BIT}, #{nickname,jdbcType=VARCHAR}, 
+      #{mobileNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, 
+      #{storeName,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{ownerAccount,jdbcType=VARCHAR}, 
+      #{roleCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{userStatus,jdbcType=BIT}, 
+      #{dr,jdbcType=BIT}, #{email,jdbcType=VARCHAR}, #{flagManager,jdbcType=TINYINT}, 
+      #{accountFlag,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jd.jw.auth.domain.JwUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into jw_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="account != null">
+        account,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="mobileNo != null">
+        mobile_no,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="storeCode != null">
+        store_code,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="ownerAccount != null">
+        owner_account,
+      </if>
+      <if test="roleCode != null">
+        role_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="dr != null">
+        dr,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="flagManager != null">
+        flag_manager,
+      </if>
+      <if test="accountFlag != null">
+        account_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=BIT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null">
+        #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAccount != null">
+        #{ownerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=BIT},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=BIT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="flagManager != null">
+        #{flagManager,jdbcType=TINYINT},
+      </if>
+      <if test="accountFlag != null">
+        #{accountFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jd.jw.auth.domain.JwUser">
+    update jw_user
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=BIT},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null">
+        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null">
+        store_code = #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAccount != null">
+        owner_account = #{ownerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=BIT},
+      </if>
+      <if test="dr != null">
+        dr = #{dr,jdbcType=BIT},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="flagManager != null">
+        flag_manager = #{flagManager,jdbcType=TINYINT},
+      </if>
+      <if test="accountFlag != null">
+        account_flag = #{accountFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jd.jw.auth.domain.JwUser">
+    update jw_user
+    set account = #{account,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=BIT},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      store_code = #{storeCode,jdbcType=VARCHAR},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      owner_account = #{ownerAccount,jdbcType=VARCHAR},
+      role_code = #{roleCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=BIT},
+      dr = #{dr,jdbcType=BIT},
+      email = #{email,jdbcType=VARCHAR},
+      flag_manager = #{flagManager,jdbcType=TINYINT},
+      account_flag = #{accountFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
